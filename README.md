@@ -1,28 +1,34 @@
 ﻿# MO.Result NuGet Package
 
-This package is designed to make the transaction results more understandable.
+MO.Result, .NET projeleri için özel olarak tasarlanmış bir sonuç dönüşüm kütüphanesidir. Bu kütüphane, metotlarınızın dönüş değerlerini daha açıklayıcı hale getirmenize olanak tanırken, hata işleme sürecini kolaylaştırmak için kullanılır.
 
-## Installation
-To integrate MO.Result into your project, install it via the NuGet package manager:
-Install-Package MO.Result
+## Nasıl Kullanılır
+Kullanım: MO.Result'ı kullanmak için aşağıdaki adımları izleyin:
 
-Or through the .NET CLI:
-dotnet add package MO.Result
-
-## Usage 
 ```csharp
+using MO.Result;
 
-## Success 
+public class ExampleService
+{
+    public Result<int> Divide(int numerator, int denominator)
+    {
+        if (denominator == 0)
+        {
+            return Result<int>.Fail("Denominator cannot be zero.");
+        }
 
-return Result<string>.Success("User create is successful");
-return Result<data type>.Success(data);
-
-## Fail
-return Result<string> Fail(401, "Something wrong")
-return Result<string>.Failure(new List<string>() {"User not found!","Password is wrong!"});
-
-
+        int result = numerator / denominator;
+        return Result<int>.Success(result);
+    }
+}
 ```
+Kullanımda, Result<T> tipini metotların dönüş değeri olarak kullanabilirsiniz. Bu tip, başarılı veya başarısız bir işlemi temsil eder. Success ve Fail metotlarıyla sonuç döndürülebilir.
+
+Özellikler
+Açıklayıcı Sonuçlar: Metotların dönüş değerlerini daha açıklayıcı hale getirir.
+Hata İşleme: Başarısız işlemlerin yönetimini kolaylaştırır.
+Generics Desteği: Herhangi bir tür için sonuçlar döndürmek için generics desteği sağlar.
+Katkıda Bulunma
 
 ## Source Code 
 ```
