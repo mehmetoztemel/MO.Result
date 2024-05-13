@@ -22,7 +22,7 @@ public class ExampleService
     }
 }
 ```
-Kullanımda, Result<T> tipini metotların dönüş değeri olarak kullanabilirsiniz. Bu tip, başarılı veya başarısız bir işlemi temsil eder. Success ve Fail metotlarıyla sonuç döndürülebilir.
+Kullanımda, Result <T> tipini metotların dönüş değeri olarak kullanabilirsiniz. Bu tip, başarılı veya başarısız bir işlemi temsil eder. Success ve Fail metotlarıyla sonuç döndürülebilir.
 
 Özellikler
 Açıklayıcı Sonuçlar: Metotların dönüş değerlerini daha açıklayıcı hale getirir.
