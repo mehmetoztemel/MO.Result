@@ -2,23 +2,37 @@
 {
     public sealed class Result<T>
     {
-        public T? Data { get; set; }
-        public bool IsSuccess => ErrorMessages == null || ErrorMessages.Count == 0;
-        public List<string>? ErrorMessages { get; set; }
-        public int StatusCode { get; set; }
-        public static Result<T> Success(T data, int statusCode = 200)
+        public T? Data { get; private set; }
+        public List<string> ErrorMessages { get; private set; }
+        public int StatusCode { get; private set; }
+        public bool IsSuccess => ErrorMessages.Count == 0;
+
+        private Result(T data)
         {
-            return new Result<T> { Data = data, StatusCode = statusCode };
+            Data = data;
+            StatusCode = 200;
+            ErrorMessages = new List<string>();
         }
 
-        public static Result<T> Failure(List<string> errorMessages, int statusCode = 500)
+        private Result(List<string> errorMessages, int statusCode)
         {
-            return new Result<T> { ErrorMessages = errorMessages, StatusCode = statusCode };
+            ErrorMessages = errorMessages ?? new List<string>();
+            StatusCode = statusCode;
         }
 
-        public static Result<T> Failure(string errorMessage, int statusCode = 500)
+        public static Result<T> Success(T data)
         {
-            return new Result<T> { ErrorMessages = new List<string> { errorMessage }, StatusCode = statusCode };
+            return new Result<T>(data);
+        }
+
+        public static Result<T> Failure(List<string> errorMessages, int statusCode = 999)
+        {
+            return new Result<T>(errorMessages, statusCode);
+        }
+
+        public static Result<T> Failure(string errorMessage, int statusCode = 999)
+        {
+            return new Result<T>(new List<string> { errorMessage }, statusCode);
         }
     }
 }
